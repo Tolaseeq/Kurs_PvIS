@@ -1,0 +1,36 @@
+﻿<Window x:Class="KURS_SERGEEV.UserManagementPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KURS_SERGEEV"
+        mc:Ignorable="d"
+        Title="ControlPanel" Background="DarkSlateBlue" Height="450" Width="425">
+    <Grid Visibility="Visible">
+        <DataGrid x:Name="table_grid" Margin="33,10,0,0" FontFamily="Bahnschrift SemiBold" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Height="260" AutoGenerateColumns="False">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="Turquoise"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="     ID" Binding="{Binding id}" Width="50" />
+                <DataGridTextColumn Header="          User Name" Binding="{Binding username}" Width="150" />
+                <DataGridTextColumn Header=" Ban Status" Binding="{Binding ban_status}" Width="80" />
+                <DataGridTextColumn Header=" Is Admin?" Binding="{Binding is_admin}" Width="80" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Ban/Unban user" x:Name="ban_unban" HorizontalAlignment="Left" Margin="120,286,0,0" VerticalAlignment="Top" Height="50" Width="140" RenderTransformOrigin="0.5,0.5" Click="ban_unban_Click"/>
+        <Button Content="Film List" HorizontalAlignment="Left" Margin="120,371,0,0" VerticalAlignment="Top" Height="42" Width="109" Click="film_list_Click"/>
+        <StackPanel x:Name="id_panel" Visibility="Visible">
+            <Grid>
+                <Label Content="ID" HorizontalAlignment="Left" Margin="33,279,0,0" VerticalAlignment="Top" Width="78" Height="38" FontSize="14" FontWeight="Bold" Background="White"/>
+                <TextBox HorizontalAlignment="Left" x:Name="id_box" Margin="33,322,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="25"/>
+            </Grid>
+            <Button Content="Set Admin" x:Name="set_admin" Height="50" Width="140" Margin="250,-70,0,0" Click="set_admin_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

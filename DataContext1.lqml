@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Database Name="fs_db" EntityNamespace="FsDbContext" ContextNamespace="FsDbContext" Class="FsDbDataContext" xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" ed:Guid="22107987-ab83-4857-a56e-ce360b5d83f5" Provider="Devart.Data.MySql.Linq.Provider.MySqlDataProvider, Devart.Data.MySql.Linq" Extended="true" xmlns="http://schemas.devart.com/linqconnect/mapping">
+  <Connection Mode="ConnectionString" ConnectionString="User Id=root;Password=1234;Host=localhost;Database=fs_db;Persist Security Info=True" Provider="Devart.Data.MySql" />
+  <Table Name="fs_db.films" Member="Films">
+    <Type Name="Film" ed:Guid="88a3db80-ad28-4a66-baaa-27070d8bc49d">
+      <Column Name="film_id" Member="FilmId" Type="System.Int32" AutoSync="OnInsert" DbType="INT NOT NULL AUTO_INCREMENT" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Always" ed:ValidateRequired="true" ed:Guid="bb3eaec8-130f-4abb-afef-9c0fc036babc" />
+      <Column Name="film_name" Member="FilmName" Type="System.String" DbType="VARCHAR(45) NOT NULL" CanBeNull="false" UpdateCheck="Never" MaxLength="45" Unicode="true" ed:ValidateMaxLength="45" ed:ValidateRequired="true" ed:Guid="7db86247-1f8f-4cc8-890f-59ca7dbac430" />
+      <Column Name="film_genre" Member="FilmGenre" Type="System.String" DbType="VARCHAR(45) NOT NULL" CanBeNull="false" UpdateCheck="Never" MaxLength="45" Unicode="true" ed:ValidateMaxLength="45" ed:ValidateRequired="true" ed:Guid="9ebf64ab-5907-4709-9e66-501ace5b82e4" />
+      <Column Name="film_description" Member="FilmDescription" Type="System.String" DbType="VARCHAR(45) NULL" CanBeNull="true" UpdateCheck="Never" MaxLength="45" Unicode="true" ed:ValidateMaxLength="45" ed:ValidateRequired="false" ed:Guid="c650fbeb-abcd-425f-bb4b-fe72afe2765f" />
+      <Column Name="critic_rate" Member="CriticRate" Type="System.Int32" DbType="INT NULL" CanBeNull="true" UpdateCheck="Never" ed:ValidateRequired="false" ed:Guid="e9db19f0-c636-46aa-8597-c5afcf744217" />
+    </Type>
+  </Table>
+  <Table Name="fs_db.users" Member="Users">
+    <Type Name="User" ed:Guid="aaee64fe-6460-49e1-8c90-d8343ba869bf">
+      <Column Name="user_id" Member="UserId" Type="System.Int32" AutoSync="OnInsert" DbType="INT NOT NULL AUTO_INCREMENT" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Always" ed:ValidateRequired="true" ed:Guid="2e3eaa99-e530-4c35-ae87-09e6de651932" />
+      <Column Name="username" Member="Username" Type="System.String" DbType="VARCHAR(45) NOT NULL" CanBeNull="false" UpdateCheck="Never" MaxLength="45" Unicode="true" ed:ValidateMaxLength="45" ed:ValidateRequired="true" ed:Guid="4d2afe18-f565-4592-a789-2239b9a254f9" />
+      <Column Name="`password`" Member="Password" Type="System.String" DbType="VARCHAR(45) NOT NULL" CanBeNull="false" UpdateCheck="Never" MaxLength="45" Unicode="true" ed:ValidateMaxLength="45" ed:ValidateRequired="true" ed:Guid="9e47d797-3073-4120-a1ff-4191eb18a559" />
+      <Column Name="ban_status" Member="BanStatus" Type="System.SByte" DbType="TINYINT NOT NULL" CanBeNull="false" UpdateCheck="Never" ed:ValidateRequired="true" ed:Guid="d6f6bfe6-ad11-40e7-b6c2-9871bf395e2c" />
+      <Column Name="is_admin" Member="IsAdmin" Type="System.SByte" DbType="TINYINT NOT NULL" CanBeNull="false" UpdateCheck="Never" ed:ValidateRequired="true" ed:Guid="5d198a82-87c8-420a-b58a-a26e472d574b" />
+    </Type>
+  </Table>
+</Database>

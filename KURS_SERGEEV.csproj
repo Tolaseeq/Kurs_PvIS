@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="mainpic.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Devart.Data.MySql.Linq" Version="4.9.2281" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="mainpic.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DataClasses1.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
+    </None>
+    <None Update="DataContext1.Diagram1.view">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataContext1.lqml</DependentUpon>
+    </None>
+    <None Update="DataContext1.edps">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataContext1.lqml</DependentUpon>
+    </None>
+    <None Update="DataContext1.lqml">
+      <Generator>DevartLinqToSqlGenerator</Generator>
+      <LastGenOutput>DataContext1.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{3259aa49-8aa1-44d3-9025-a0b520596a8c}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="DataClasses1.designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataClasses1.dbml</DependentUpon>
+    </Compile>
+    <Compile Update="DataContext1.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataContext1.lqml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>
