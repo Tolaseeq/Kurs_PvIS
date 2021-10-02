@@ -20,7 +20,6 @@ namespace KURS_SERGEEV
     public partial class ControlPanel : Window
     {
         static FsDbContext.FsDbDataContext context = new FsDbContext.FsDbDataContext();
-        static FsDbContext.Film newFilm = new FsDbContext.Film();
         static bool new_record_click = false;
         static bool change_record_click = false;
         static bool delete_record_click = false;
@@ -64,15 +63,27 @@ namespace KURS_SERGEEV
                 change_rec_panel.Visibility = Visibility.Visible;
                 id_panel.Visibility = Visibility.Collapsed;
                 new_record_click = true;
+                delete_record_click = false;
+                change_record_click = false;
             }
             else
             {
-                newFilm.FilmName = name_in.Text;
-                newFilm.FilmGenre = genre_in.Text;
-                newFilm.FilmDescription = desc_in.Text;
-                newFilm.CriticRate = Convert.ToInt32(rate_in.Text);
-                context.Films.InsertOnSubmit(newFilm);
-                context.SubmitChanges();
+                if (Regex.IsMatch(name_in.Text, @"^[0-9a-zA-Z_\s]{4,20}$") && Regex.IsMatch(genre_in.Text, @"^[0-9a-zA-Z_\s]{4,20}$") && (Convert.ToInt32(rate_in.Text)<11) && (Convert.ToInt32(rate_in.Text)>0))
+                {
+                    FsDbContext.Film newFilm = new FsDbContext.Film();
+                    var dbfilms = context.Films.ToList();
+                    newFilm.FilmId = dbfilms.Last().FilmId + 1;
+                    newFilm.FilmName = name_in.Text;
+                    newFilm.FilmGenre = genre_in.Text;
+                    newFilm.FilmDescription = desc_in.Text;
+                    newFilm.CriticRate = Convert.ToInt32(rate_in.Text);
+                    context.Films.InsertOnSubmit(newFilm);
+                    context.SubmitChanges();
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("Incorrect data!");
+                }
                 update_list();
                 new_record_click = false;
                 change_rec_panel.Visibility = Visibility.Collapsed;
@@ -82,30 +93,39 @@ namespace KURS_SERGEEV
 
         private void change_record_Click(object sender, RoutedEventArgs e)
         {
-            if (delete_record_click == false)
+            if (change_record_click == false)
             {
                 change_rec_panel.Visibility = Visibility.Visible;
                 id_panel.Visibility = Visibility.Visible;
-                delete_record_click = true;
+                change_record_click = true;
+                delete_record_click = false;
+                new_record_click = false;
             }
             else
             {
-                foreach (FsDbContext.Film film in context.Films)
+                if (Regex.IsMatch(name_in.Text, @"^[0-9a-zA-Z_\s]{4,20}$") && Regex.IsMatch(genre_in.Text, @"^[0-9a-zA-Z_\s]{4,20}$") && (Convert.ToInt32(rate_in.Text) < 11) && (Convert.ToInt32(rate_in.Text) > 0))
                 {
-                    if (film.FilmId == Convert.ToInt32(id_in.Text))
+                    foreach (FsDbContext.Film film in context.Films)
                     {
-                        film.FilmName = name_in.Text;
-                        film.FilmGenre = genre_in.Text;
-                        film.FilmDescription = desc_in.Text;
-                        film.CriticRate = Convert.ToInt32(rate_in.Text);
-                        break;
+                        if (film.FilmId == Convert.ToInt32(id_in.Text))
+                        {
+                            film.FilmName = name_in.Text;
+                            film.FilmGenre = genre_in.Text;
+                            film.FilmDescription = desc_in.Text;
+                            film.CriticRate = Convert.ToInt32(rate_in.Text);
+                            break;
+                        }
                     }
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("Incorrect data!");
                 }
                 context.SubmitChanges();
                 update_list();
                 change_rec_panel.Visibility = Visibility.Collapsed;
                 id_panel.Visibility = Visibility.Collapsed;
-                delete_record_click = false;
+                change_record_click = false;
             }
         }
 
@@ -116,16 +136,25 @@ namespace KURS_SERGEEV
                 change_rec_panel.Visibility = Visibility.Collapsed;
                 id_panel.Visibility = Visibility.Visible;
                 delete_record_click = true;
+                new_record_click = false;
+                change_record_click = false;
             }
             else
             {
-                foreach (FsDbContext.Film film in context.Films)
-                {
-                    if (film.FilmId == Convert.ToInt32(id_in.Text))
+                if (Regex.IsMatch(id_in.Text, @"^[0-9]{1,20}$"))
                     {
-                        context.Films.DeleteOnSubmit(film);
-                        break;
+                    foreach (FsDbContext.Film film in context.Films)
+                    {
+                        if (film.FilmId == Convert.ToInt32(id_in.Text))
+                        {
+                            context.Films.DeleteOnSubmit(film);
+                            break;
+                        }
                     }
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("Incorrect data!");
                 }
                 context.SubmitChanges();
                 update_list();

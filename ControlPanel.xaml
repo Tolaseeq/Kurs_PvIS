@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KURS_SERGEEV"
         mc:Ignorable="d"
-        Title="ControlPanel" Background="DarkSlateBlue" Height="450" Width="800">
+        Title="ControlPanel" Background="DarkSlateBlue" Height="450" Width="809">
     <Grid Visibility="Visible">
-        <DataGrid x:Name="table_grid" Margin="0,10,0,0" FontFamily="Bahnschrift SemiBold" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top" Height="260" AutoGenerateColumns="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="399*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="table_grid" Margin="0,10,0,0" FontFamily="Bahnschrift SemiBold" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top" Height="260" AutoGenerateColumns="False" Grid.Column="1">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="Turquoise"/>
@@ -24,11 +28,11 @@
                 <DataGridTextColumn Header="    Critic Rate" Binding="{Binding Path = critic_rate}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="New Record" x:Name="new_record" HorizontalAlignment="Center" Margin="-350,371,0,0" VerticalAlignment="Top" Height="40" Width="100" Click="new_record_Click"/>
-        <Button Content="Change Record" x:Name="change_record" HorizontalAlignment="Left" Margin="30,371,0,0" VerticalAlignment="Top" Height="40" Width="100" RenderTransformOrigin="0.497,0.544" Click="change_record_Click"/>
-        <Button Content="Delete Record" x:Name="delete_record" HorizontalAlignment="Left" Margin="330,371,0,0" VerticalAlignment="Top" Height="40" Width="100" Click="delete_record_Click"/>
-        <Button Content="User List" HorizontalAlignment="Left" Margin="670,371,0,0" VerticalAlignment="Top" Height="42" Width="109" Click="user_table_Click"/>
-        <StackPanel x:Name="change_rec_panel" Visibility="Collapsed">
+        <Button Content="New Record" x:Name="new_record" HorizontalAlignment="Left" Margin="173,371,0,0" VerticalAlignment="Top" Height="40" Width="100" Click="new_record_Click" Grid.Column="1"/>
+        <Button Content="Change Record" x:Name="change_record" HorizontalAlignment="Left" Margin="28,371,0,0" VerticalAlignment="Top" Height="40" Width="100" RenderTransformOrigin="0.497,0.544" Click="change_record_Click" Grid.Column="1"/>
+        <Button Content="Delete Record" x:Name="delete_record" HorizontalAlignment="Left" Margin="328,371,0,0" VerticalAlignment="Top" Height="40" Width="100" Click="delete_record_Click" Grid.Column="1"/>
+        <Button Content="User List" HorizontalAlignment="Left" Margin="668,371,0,0" VerticalAlignment="Top" Height="42" Width="109" Click="user_table_Click" Grid.Column="1"/>
+        <StackPanel x:Name="change_rec_panel" Visibility="Collapsed" Grid.ColumnSpan="2">
             <Grid>
                 <Label Content="Name" HorizontalAlignment="Left" Margin="91,289,0,0" VerticalAlignment="Top" Width="123" Height="38" FontSize="14" FontWeight="Bold" Background="White"/>
                 <Label Content="Genre" HorizontalAlignment="Left" Margin="218,289,0,0" VerticalAlignment="Top" Width="77" Height="38" FontSize="14" FontWeight="Bold" Background="White"/>
@@ -40,7 +44,7 @@
                 <TextBox HorizontalAlignment="Left" x:Name="rate_in" Margin="684,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="96" Height="25"/>
             </Grid>
         </StackPanel>
-        <StackPanel x:Name="id_panel" Visibility="Collapsed">
+        <StackPanel x:Name="id_panel" Visibility="Collapsed" Grid.ColumnSpan="2">
             <Grid>
                 <Label Content="ID" HorizontalAlignment="Left" Margin="8,289,0,0" VerticalAlignment="Top" Width="78" Height="38" FontSize="14" FontWeight="Bold" Background="White"/>
                 <TextBox HorizontalAlignment="Left" x:Name="id_in" Margin="8,332,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="25"/>

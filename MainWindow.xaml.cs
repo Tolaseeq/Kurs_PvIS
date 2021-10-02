@@ -40,7 +40,7 @@ namespace KURS_SERGEEV
                     bool match = false;
                     foreach (FsDbContext.User user in context.Users)
                     {
-                        if ((pass.Equals(user.Password, StringComparison.InvariantCultureIgnoreCase))&&(login.Text.Equals(user.Username)) && (user.IsAdmin == 1))
+                        if ((pass.Equals(user.Password, StringComparison.InvariantCultureIgnoreCase))&&(login.Text.Equals(user.UserName)) /*&& (user.IsAdmin == 1)*/)
                         {
                             ControlPanel controlPanel = new ControlPanel();
                             match = true;

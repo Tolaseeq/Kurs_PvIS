@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ControlPanel" Background="DarkSlateBlue" Height="450" Width="425">
     <Grid Visibility="Visible">
-        <DataGrid x:Name="table_grid" Margin="33,10,0,0" FontFamily="Bahnschrift SemiBold" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Height="260" AutoGenerateColumns="False">
+        <DataGrid x:Name="table_grid" Margin="33,10,0,0" FontFamily="Bahnschrift SemiBold" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Height="260" AutoGenerateColumns="False" Width="367">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="Turquoise"/>
@@ -18,19 +18,19 @@
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="     ID" Binding="{Binding id}" Width="50" />
-                <DataGridTextColumn Header="          User Name" Binding="{Binding username}" Width="150" />
-                <DataGridTextColumn Header=" Ban Status" Binding="{Binding ban_status}" Width="80" />
-                <DataGridTextColumn Header=" Is Admin?" Binding="{Binding is_admin}" Width="80" />
+                <DataGridTextColumn Header="          User Name" Binding="{Binding user_name}" Width="230" />
+                <DataGridTextColumn Header=" Role" Binding="{Binding user_role_name}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Ban/Unban user" x:Name="ban_unban" HorizontalAlignment="Left" Margin="120,286,0,0" VerticalAlignment="Top" Height="50" Width="140" RenderTransformOrigin="0.5,0.5" Click="ban_unban_Click"/>
+        <Button Content="Change Role" x:Name="change_role" HorizontalAlignment="Left" Margin="260,286,0,0" VerticalAlignment="Top" Height="50" Width="140" RenderTransformOrigin="0.5,0.5" Click="change_role_Click"/>
         <Button Content="Film List" HorizontalAlignment="Left" Margin="120,371,0,0" VerticalAlignment="Top" Height="42" Width="109" Click="film_list_Click"/>
         <StackPanel x:Name="id_panel" Visibility="Visible">
             <Grid>
                 <Label Content="ID" HorizontalAlignment="Left" Margin="33,279,0,0" VerticalAlignment="Top" Width="78" Height="38" FontSize="14" FontWeight="Bold" Background="White"/>
                 <TextBox HorizontalAlignment="Left" x:Name="id_box" Margin="33,322,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="25"/>
+                <Label Content="Role" HorizontalAlignment="Left" Margin="134,279,0,0" VerticalAlignment="Top" Width="78" Height="38" FontSize="14" FontWeight="Bold" Background="White"/>
+                <TextBox HorizontalAlignment="Left" x:Name="role_box" Margin="134,322,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="25"/>
             </Grid>
-            <Button Content="Set Admin" x:Name="set_admin" Height="50" Width="140" Margin="250,-70,0,0" Click="set_admin_Click"/>
         </StackPanel>
     </Grid>
 </Window>

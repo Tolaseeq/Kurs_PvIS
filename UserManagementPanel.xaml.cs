@@ -35,23 +35,19 @@ namespace KURS_SERGEEV
             {
                 userlist.AddNew();
                 userlist.Last().id = user.UserId;
-                userlist.Last().username = user.Username;
-                userlist.Last().password = user.Password;
-                if (user.BanStatus == 1)
+                userlist.Last().user_name = user.UserName;
+                foreach (FsDbContext.UserRole role_c in context.UserRoles)
                 {
-                    userlist.Last().ban_status = true;
-                }
-                else
-                {
-                    userlist.Last().ban_status = false;
-                }
-                if (user.IsAdmin == 1)
-                {
-                    userlist.Last().is_admin = true;
-                }
-                else
-                {
-                    userlist.Last().is_admin = false;
+                    if (userlist.Last().id == role_c.UserId)
+                    {
+                        foreach (FsDbContext.Role role_n in context.Roles)
+                        {
+                            if (role_c.RoleId == role_n.RoleId)
+                            {
+                                userlist.Last().user_role_name = role_n.Role1;
+                            }
+                        }
+                    }
                 }
             }
             table_grid.ItemsSource = userlist;
@@ -60,67 +56,41 @@ namespace KURS_SERGEEV
                         select it;
         }
 
-        private void ban_unban_Click(object sender, RoutedEventArgs e)
+        private void change_role_Click(object sender, RoutedEventArgs e)
         {
-            if (!Regex.IsMatch(id_box.Text, @"^[0-9_]{1,10}$"))
+            FsDbContext.UserRole newRow = new FsDbContext.UserRole();
+            if (!Regex.IsMatch(id_box.Text, @"^[0-9_]{1,10}$") || (!String.Equals(role_box.Text, "ADMIN") && !String.Equals(role_box.Text, "USER") && !String.Equals(role_box.Text, "BANNED")))
             {
-                System.Windows.MessageBox.Show("Incorrect index!");
+                System.Windows.MessageBox.Show("Incorrect index or role name!");
             }
             else
             {
-                foreach (FsDbContext.User user in context.Users)
+                foreach (FsDbContext.Role role in context.Roles)
                 {
-                    if (user.UserId == Convert.ToInt32(id_box.Text))
+                    if (role.Role1.Equals(role_box.Text))
                     {
-                        if(user.BanStatus == 1)
-                        {
-                            user.BanStatus = 0;
-                        }
-                        else
-                        {
-                            user.BanStatus = 1;
-                        }
-                        break;
+                        newRow.RoleId = role.RoleId;
                     }
                 }
+                foreach (FsDbContext.UserRole userrole in context.UserRoles)
+                {
+                    if (userrole.UserId == Convert.ToInt32(id_box.Text))
+                    {
+                        newRow.UserId = userrole.UserId;
+                        context.UserRoles.DeleteOnSubmit(userrole);
+                    }
+                         
+                }
+                context.UserRoles.InsertOnSubmit(newRow);
                 context.SubmitChanges();
                 update_list();
             }
         }
-
         private void film_list_Click(object sender, RoutedEventArgs e)
         {
             ControlPanel controlPanel = new ControlPanel();
             controlPanel.Show();
             this.Close();
-        }
-
-        private void set_admin_Click(object sender, RoutedEventArgs e)
-        {
-            if (!Regex.IsMatch(id_box.Text, @"^[0-9_]{1,10}$"))
-            {
-                System.Windows.MessageBox.Show("Incorrect index!");
-            }
-            else
-            {
-                foreach (FsDbContext.User user in context.Users)
-                {
-                    if (user.UserId == Convert.ToInt32(id_box.Text))
-                    {
-                        if (user.IsAdmin == 1)
-                        {
-                            user.IsAdmin = 0;
-                        }
-                        else
-                        {
-                            user.IsAdmin = 1;
-                        }
-                        break;
-                    }
-                }
-                context.SubmitChanges();
-                update_list();
-            }
         }
     }
 }
