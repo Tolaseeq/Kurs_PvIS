@@ -72,7 +72,14 @@ namespace KURS_SERGEEV
                 {
                     FsDbContext.Film newFilm = new FsDbContext.Film();
                     var dbfilms = context.Films.ToList();
-                    newFilm.FilmId = dbfilms.Last().FilmId + 1;
+                    if (dbfilms.Last().FilmId != null)
+                    {
+                        newFilm.FilmId = dbfilms.Last().FilmId + 1;
+                    }
+                    else
+                    {
+                        newFilm.FilmId = 1;
+                    }
                     newFilm.FilmName = name_in.Text;
                     newFilm.FilmGenre = genre_in.Text;
                     newFilm.FilmDescription = desc_in.Text;
